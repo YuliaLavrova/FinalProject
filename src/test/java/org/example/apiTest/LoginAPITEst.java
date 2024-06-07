@@ -23,6 +23,6 @@ public class LoginAPITEst {
         Response response = given().log().all().contentType(ContentType.JSON).body("111")
                 .when().post("/register")
                 .then().log().all().extract().response();
-        assertEquals(response.statusCode(), 422);
+        assertEquals(response.statusCode(), 419);
     }
 }

@@ -31,7 +31,7 @@ public class ShoppingSite7745 {
     @Test
     public void tryToRegisterWithIncorrectEmailTest() {
         driver.findElement(By.id("logon-link")).click();
-        driver.findElement(By.cssSelector(".btn.btn-orange.btn-orange--bordered.registration-link")).click();
+        driver.findElement(By.xpath("//button[text()='Зарегистрироваться']")).click();
         driver.findElement(By.id("customer_registration_name_")).sendKeys("Ivanov");
         driver.findElement(By.id("customer_registration_phone_")).sendKeys("888999");
         driver.findElement(By.id("customer_registration_email_")).sendKeys("a");
