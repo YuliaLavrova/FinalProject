@@ -6,8 +6,6 @@ import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.File;
-
 import static io.restassured.RestAssured.given;
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -16,6 +14,14 @@ public class LoginAPITEst {
     @BeforeMethod
     public void url() {
         RestAssured.baseURI = "https://7745.by";
+    }
+
+    @Test
+    public void getTest() {
+        given().
+                auth().basic("login", "password")
+                .when().get("/login")
+                .then().log().all().statusCode(200);
     }
 
     @Test
