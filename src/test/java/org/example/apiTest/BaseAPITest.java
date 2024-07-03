@@ -1,0 +1,21 @@
+package org.example.apiTest;
+
+import io.restassured.RestAssured;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.example.listeners.TestListener;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+
+@Listeners(TestListener.class)
+public class BaseAPITest {
+
+    protected String cookie = "hg-client-security=2hSRfI2bcwePE3MxyumTwshpmqo; xoxo7745=eyJpdiI6Ik1jeDc2bEFIWDhiN0gxd01sYmlDc3c9PSIsInZhbHVlIjoiSTcrT2Job0tTdHU5Y1lBSGcrR29LOEQvWDY1cFA3elZPU1R6TWVzVFd1TWFEOCtJbVVXdGdFOElvd05aZ01RWmI3bkRnMHU3djNFUU9XUkRTQVBKNURBWTlIKzhUUjBycE84QXNFaWlqSEN1VjdyS0xxQlpLRkpWKzZYQmdGeUkiLCJtYWMiOiIxNzZiOGVlYWE3OTJjYmI3MGY5MmU2MTA0YTU3YjgzOTkyY2I0MjZiM2UyOGM1NDZjOWVhMmUxMDE1MGJkMDExIiwidGFnIjoiIn0%3D; _gcl_au=1.1.763013517.1717585606; _ym_uid=171758560767486609; _ym_d=1717585607; tmr_lvid=493a5931b899db4d4bb5d7cab071fc19; tmr_lvidTS=1717585608682; _fbp=fb.1.1717585612785.799266909240527860; supportOnlineTalkID=QUn0AgxQnfJc3OHudk9BpkrFsD9UWgtE; _gid=GA1.2.1391941831.1719922730; domain_sid=qurJsdMHX7u9ghcH3hf-S%3A1719922743704; locality_id=18091; previousUrl=https%3A%2F%2F7745.by%2F; _ym_isad=1; _ga=GA1.1.516993976.1717585609; _ym_visorc=b; tmr_detect=0%7C1719999462890; XSRF-TOKEN=eyJpdiI6IlFzZFoveXIrTGZWVDZOeHJwbWFETEE9PSIsInZhbHVlIjoiZi9TMFJzN2V1TlQzSEw3NGF2dGppeVlCSUlRQXhvUzdpdERRRmQ4MHlPZmg4aTFET1JpOFp3UW54cVJWSjcyMFRDSDhEWS9tcDk2L2pxQXcwN1JWNnh5T3JVdzFFTFo2VkZodzVlZVlFY2oxK2hxTllSTFJPcVltd3N5Yi92WjciLCJtYWMiOiIwMTNjNDQ5ODU1OTYyZGJmNTgyNDVkMDllZTE2MWNmZmRjODI1ODVjNTA2NWZkYjMzMWJmMjFjOTI5OWVmOWI3IiwidGFnIjoiIn0%3D; bolsoi_magazin_7745_session=eyJpdiI6IkpwK1ljaDdLcjZDeCtSMVZ3bGF4RHc9PSIsInZhbHVlIjoiNzRwRjA0d3ZFSVI4c1FkZzJhbVl4Ymd0T3RMVGN2a2Jidmk3RGp5VmNZVXpCeWlDNjFObzIrWjVZMWZ6Y1pvSXJWSVgxOGpscVZybzJyVnhnbWxqdk1oajNjMXcrK2JOT0pXKzhabXFxcXZtMGFqZFdtRnZhZDlNc1ltOVFWWU4iLCJtYWMiOiJiODE5OWVmYzVkYjZkODY0N2M3ZDc3N2IwNTk3NmFhOTE0ZWRiMDE5MzczNDFiY2RmYmI5NDJjYmNiYzY0Y2EwIiwidGFnIjoiIn0%3D; _ga_WF8S0VLP17=GS1.1.1719999455.20.1.1719999529.60.0.0";
+
+    protected String token = "jKGy4vTpZqAg33QjVbj6i5eNNBCxXOVk1muPxHXF";
+
+    @BeforeMethod
+    public void url() {
+        RestAssured.baseURI = "https://7745.by";
+    }
+}

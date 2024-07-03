@@ -1,50 +1,116 @@
 package org.example.uiTest;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.example.pages.*;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
+import java.util.List;
 
-public class ShoppingSite7745 {
+public class ShoppingSite7745 extends BaseTest {
 
-    @FindBy(xpath = "//input[@value='Зарегистрироваться']")
-    private WebElement RegistrationBtn;
+    private static final Logger LOGGER = LogManager.getLogger(ShoppingSite7745.class);
 
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setUp() {
-        System.setProperty("Webdriver.chromedriver", "C://chromedriver");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://7745.by/");
+    @Test
+    public void tryToLoginWithIncorrectData() {
+        String phone = " ";
+        String password = "111111Qe";
+        String errorMessageExpected = "Извините, указанный номер телефона или пароль неверны. Попробуйте набрать снова.";
+        HomePage homePage = new HomePage(driver);
+        homePage.openUrl();
+        LoginForm loginForm = homePage.openLoginForm();
+        String errorMessage = loginForm.getErrorMessageWithIncorrectLogin(phone, password);
+        LOGGER.info("The next error message displayed: " + errorMessage);
+        Assert.assertEquals(errorMessage, errorMessageExpected);
     }
 
     @Test
-    public void tryToRegisterWithIncorrectEmailTest() {
-        driver.findElement(By.id("logon-link")).click();
-        driver.findElement(By.xpath("//button[text()='Зарегистрироваться']")).click();
-        driver.findElement(By.id("customer_registration_name_")).sendKeys("Ivanov");
-        driver.findElement(By.id("customer_registration_phone_")).sendKeys("888999");
-        driver.findElement(By.id("customer_registration_email_")).sendKeys("a");
-        driver.findElement(By.id("accepted_offer-8313")).click();
-        RegistrationBtn.click();
-        driver.findElement(By.cssSelector(".recaptcha-checkbox-border")).click();
-        RegistrationBtn.click();
-        WebElement text = driver.findElement(By.cssSelector(".messages.error"));
-        Assert.assertEquals(text.getText(), "Необходимо указать корректный адрес электронной почты.");
+    public void tryToRegisterWithIncorrectPassword() {
+        String name = "Petrov Peter";
+        String phone = "292356672";
+        String email = "it@mail.ru";
+        String password = "111111Qe";
+        String errorMessageExpected = "Подтверждение пароля не совпадает с введённым паролем, попробуйте снова.";
+        HomePage homePage = new HomePage(driver);
+        homePage.openUrl();
+        RegistrationForm registrationForm = homePage.openRegistrationForm();
+        registrationForm.fillRegistrationForm(name, phone, email);
+        String errorMessage = registrationForm.getErrorMessageWithConfirmPassword(password);
+        LOGGER.info(password + " was entered as password");
+        LOGGER.info("The next error message displayed: " + errorMessage);
+        Assert.assertEquals(errorMessage, errorMessageExpected);
     }
 
-    @AfterTest
-    public void closeSession() {
-        driver.quit();
+    @DataProvider(name = "email")
+    public Object[][] createData() {
+        return new Object[][]{
+                {"Ivanov", "2356671", "a"},
+                {"Peter", "2345677", "1@"},
+                {"Helen", "2145677", "@com"},
+                {"Kate", "2125677", "q@com."}
+        };
+    }
+
+    @Test(dataProvider = "email")
+    public void tryToRegisterWithIncorrectEmailTest(String name, String phone, String email) {
+        String errorMessageExpected = "Необходимо указать корректный адрес электронной почты.";
+        HomePage homePage = new HomePage(driver);
+        homePage.openUrl();
+        RegistrationForm registrationForm = homePage.openRegistrationForm();
+        String errorMessage = registrationForm.getErrorMessageWithIncorrectEmail(name, phone, email);
+        LOGGER.info(email + " was typed into Email text field");
+        LOGGER.info("Error message appeared: " + errorMessage);
+        Assert.assertEquals(errorMessage, errorMessageExpected);
+    }
+
+    @Test
+    public void searchItemsTest() {
+        String item = "Палатка";
+        boolean assertItem = false;
+        CatalogPage catalogPage = new CatalogPage(driver);
+        catalogPage.openUrl();
+        List<String> list = catalogPage.getListOfItems(item);
+        LOGGER.info(item + " was typed into search text field");
+        for (String textElement : list) {
+            assertItem = false;
+            if (textElement.contains(item)) {
+                assertItem = true;
+            }
+        }
+//        for (String i:
+//             list) {
+//            String[] arr = i.split(" ");
+//            assertItem = false;
+//            for (String word:
+//                 arr) {
+//                if(word.equals(item)) {
+//                    assertItem = true;
+//                    break;
+//                }
+//            }
+        Assert.assertTrue(assertItem, "There are extra items displayed");
+    }
+
+    @Test
+    public void addItemToCartTest() {
+        int index = 3;
+        String itemForSearch = "палатка";
+        CatalogPage catalogPage = new CatalogPage(driver);
+        catalogPage.openUrl();
+        catalogPage.searchAnyItem(itemForSearch);
+        List<String> list = catalogPage.getListOfItems(itemForSearch);
+        String itemInCatalog = list.get(index);
+        LOGGER.info(itemInCatalog + " was added to the cart");
+        catalogPage.clickAddToCartBtn(index);
+        CartPage cartPage = new CartPage(driver);
+        cartPage.openUrl();
+        LOGGER.info(cartPage.getNameOfItemCart() + " is in the cart");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(cartPage.getNameOfItemCart(), itemInCatalog);
+        softAssert.assertEquals(cartPage.getPriceOfItemCart(), catalogPage.getPriceOfItemCatalog());
+        softAssert.assertAll();
     }
 }
