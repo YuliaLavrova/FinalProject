@@ -1,13 +1,11 @@
 package org.example.apiTest;
 
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +14,9 @@ import static io.restassured.RestAssured.given;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNull;
 
-public class APITEst extends BaseAPITest{
+public class APITest extends BaseAPITest{
 
-    private static final Logger LOGGER = LogManager.getLogger(APITEst.class);
+    private static final Logger LOGGER = LogManager.getLogger(APITest.class);
 
     @Test
     public void incorrectLoginTest() {

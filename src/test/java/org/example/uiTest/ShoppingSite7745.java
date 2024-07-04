@@ -109,7 +109,7 @@ public class ShoppingSite7745 extends BaseTest {
         cartPage.openUrl();
         LOGGER.info(cartPage.getNameOfItemCart() + " is in the cart");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(cartPage.getNameOfItemCart(), itemInCatalog);
+        softAssert.assertEquals(cartPage.getNameOfItemCart(), itemInCatalog.toLowerCase());
         softAssert.assertEquals(cartPage.getPriceOfItemCart(), catalogPage.getPriceOfItemCatalog());
         softAssert.assertAll();
     }
