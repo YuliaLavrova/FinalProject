@@ -88,8 +88,7 @@
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-selenide</artifactId>
-            <version>2.27.0</version>
+            <artifactId>allure-testng</artifactId>
         </dependency>
 
         <dependency>
