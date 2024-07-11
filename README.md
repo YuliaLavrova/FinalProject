@@ -12,7 +12,7 @@ Project is created with:
 	
 ## Contents
 The project includs:
-* ** main ** 
+* # main 
   * utils
     * DriverFactory
     * ScreenshotUtil
@@ -31,7 +31,7 @@ The project includs:
     * log4j2.properties 
   * listeners
     * TestListener 
-* ** test **
+* # test
   * uiTest
     * BaseTest
     * UITest
@@ -46,4 +46,4 @@ The project includs:
       * UItestSuite
    * allure.properties
  
-* ** pom.xml **
+* # pom.xml
