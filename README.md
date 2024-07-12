@@ -47,3 +47,6 @@ The project includs:
    * allure.properties
  
 * # pom.xml
+
+ ## Author
+ This project made by Yuliya Lavrova
