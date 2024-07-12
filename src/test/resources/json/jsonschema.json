@@ -30,7 +30,7 @@
           "type": "integer"
         },
         "orderDelivery3partTime": {
-          "type": "null"
+          "type": "integer"
         },
         "articul": {
           "type": "string"

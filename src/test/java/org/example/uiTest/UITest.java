@@ -12,9 +12,9 @@ import org.testng.asserts.SoftAssert;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingSite7745 extends BaseTest {
+public class UITest extends BaseTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(ShoppingSite7745.class);
+    private static final Logger LOGGER = LogManager.getLogger(UITest.class);
 
     @Test
     public void tryToLoginWithIncorrectDataTest() {
@@ -75,9 +75,12 @@ public class ShoppingSite7745 extends BaseTest {
     public void searchItemsTest() {
         String item = "FAIRY Сочный Лимон";
         boolean assertItem = false;
-        CatalogPage catalogPage = new CatalogPage(driver);
-        catalogPage.openUrl();
-        List<String> list = catalogPage.getListOfItems(item);
+        HomePage homePage = new HomePage(driver);
+        homePage.openUrl();
+        homePage.acceptCookie();
+        CatalogPage catalogPage = homePage.searchItem(item);
+        LOGGER.info(catalogPage.getItemsFromCatalog().size() + " of items are in the WebElementslist");
+        List<String> list = catalogPage.getListOfItems();
         ScreenshotUtil.saveScreenshot(driver);
         LOGGER.info(item + " was typed into search text field");
         LOGGER.info(list.size() + " of items are in the list");
@@ -91,18 +94,6 @@ public class ShoppingSite7745 extends BaseTest {
                 errorList.add(textElement);
             }
         }
-//        for (String i:
-//                list) {
-//            String[] arr = i.split(" ");
-//            assertItem = false;
-//            for (String word :
-//                    arr) {
-//                if (word.equalsIgnoreCase(item)) {
-//                    assertItem = true;
-//                    break;
-//                }
-//            }
-//        }
         Assert.assertTrue(assertItem, "There are extra items displayed: " +  errorList);
     }
 

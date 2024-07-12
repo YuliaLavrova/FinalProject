@@ -70,7 +70,7 @@ public class APITest extends BaseAPITest{
         assertEquals(idList, productId);
     }
 
-    @Test
+    @Test(dependsOnMethods = "addToCartTest")
     public void deleteItemFromCartTest() {
         String id = "831060";
         Response response = given().header("x-csrf-token", token)

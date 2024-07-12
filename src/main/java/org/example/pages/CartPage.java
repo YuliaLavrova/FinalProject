@@ -25,10 +25,12 @@ public class CartPage {
     public void openUrl() {driver.get("https://7745.by/cart");}
 
     public String getNameOfItemCart() {
-        return itemInCart.getText();
+        return itemInCart.getText().toLowerCase();
     }
 
     public String getPriceOfItemCart() {
-        return priceOfItemInCart.getText();
+        String[] str = priceOfItemInCart.getText().split(" ");
+        String price  = str[0];
+        return price;
     }
 }

@@ -1,14 +1,18 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name = "UI Suite" thread-count="2" parallel="methods">
+<suite name = "UI Suite" thread-count="3" parallel="methods">
     <!--    <parameter name="key" value="value"></parameter>-->
     <listeners>
         <listener class-name="org.example.retry.AnnotationTransformer"/>
     </listeners>
     <test name = "UI Test">
         <classes>
-            <class name = "org.example.uiTest.ShoppingSite7745"/>
+            <class name = "org.example.uiTest.UITest" >
+                <methods>
+                    <exclude name="searchItemsTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

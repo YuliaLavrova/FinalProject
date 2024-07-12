@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.example.utils.MyWaitor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +13,7 @@ public class LoginForm {
     @FindBy(id = "logon-link")
     private WebElement logInBtn;
 
-    @FindBy(id = "(//*[@value='Войти'])[2]")
+    @FindBy(xpath = "(//*[@value='Войти'])[2]")
     private WebElement logInSecondBtn;
 
     @FindBy(xpath = "(//*[@id='login-modal-input-login'])[2]")
@@ -30,11 +31,9 @@ public class LoginForm {
     }
 
     public void login(String phone, String password) {
-        logInBtn.click();
         phoneLoginTextArea.sendKeys(phone);
         passwordLoginTextArea.sendKeys(password);
     }
-
 
     public String getErrorMessageWithIncorrectLogin(String phone, String password) {
         login(phone, password);

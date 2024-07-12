@@ -1,18 +1,14 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name = "API Suite" thread-count="2" parallel="methods">
+<suite name = "API Suite" thread-count="1" parallel="methods">
     <!--    <parameter name="key" value="value"></parameter>-->
     <listeners>
         <listener class-name="org.example.retry.AnnotationTransformer"/>
     </listeners>
     <test name = "API Test">
         <classes>
-            <class name = "org.example.apiTest.APITest" >
-                <methods>
-                    <exclude name="searchTest"/>
-                </methods>
-            </class>
+            <class name = "org.example.apiTest.APITest" />
         </classes>
     </test>
 </suite>

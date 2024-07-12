@@ -47,12 +47,6 @@ public class RegistrationForm {
         PageFactory.initElements(driver, this);
     }
 
-    public void openRegistrationForm() {
-        logInBtn.click();
-        registrationFirstBtn.click();
-    }
-
-
     public void fillRegistrationForm(String name, String phone, String email) {
         nameTextArea.sendKeys(name);
         phoneRegistrationTextArea.sendKeys(phone);
@@ -74,9 +68,5 @@ public class RegistrationForm {
         return errorMessage;
     }
 
-    public ProfilePage loginProfile(String name, String phone, String email)  {
-        fillRegistrationForm(name, phone, email);
-        return new ProfilePage(driver);
-    }
 
 }

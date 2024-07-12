@@ -36,4 +36,5 @@ public class ProductPage {
         String price  = str[0];
         return price;
     }
+
 }

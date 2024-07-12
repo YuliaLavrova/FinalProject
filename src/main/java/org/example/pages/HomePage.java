@@ -54,6 +54,15 @@ public class HomePage {
     @FindBy(xpath = "(//*[@class='messages error'])[1]")
     private WebElement errorMessageConfirmPassword;
 
+    @FindBy(id = "search")
+    private WebElement searchTextArea;
+
+    @FindBy(css = ".btn.btn-search")
+    private WebElement searchBtn;
+
+    @FindBy(css = ".btn.btn-orange.js-accept-cookies")
+    private static WebElement acceptCookieBtn;
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -72,46 +81,19 @@ public class HomePage {
         return new LoginForm(driver);
     }
 
-    public void login(String phone, String password) {
-        logInBtn.click();
-        phoneLoginTextArea.sendKeys(phone);
-        passwordLoginTextArea.sendKeys(password);
-    }
-
-    public void fillRegistrationForm(String name, String phone, String email) {
-        nameTextArea.sendKeys(name);
-        phoneRegistrationTextArea.sendKeys(phone);
-        emailTextArea.sendKeys(email);
-        agreeCheckbox.click();
-    }
-    public String getErrorMessageWithIncorrectEmail(String name, String phone, String email ) {
-        fillRegistrationForm(name, phone, email);
-        registrationSecondBtn.click();
-        return errorMessage.getText();
-    }
-
-    public String getErrorMessageWithIncorrectLogin(String phone, String password) {
-        login(phone, password);
-        logInSecondBtn.click();
-        return errorMessage.getText();
-    }
-
-    public String getErrorMessageWithConfirmPassword(String password) {
-        passwordTextArea.sendKeys(password);
-        String incorrectPassword = password.replace(password.charAt(0), '0');
-        confirmPasswordTextArea.sendKeys(incorrectPassword);
-        registrationSecondBtn.click();
-        String errorMessage = errorMessageConfirmPassword.getText();
-        return errorMessage;
-    }
-
-    public ProfilePage loginProfile(String name, String phone, String email)  {
-        fillRegistrationForm(name, phone, email);
-        return new ProfilePage(driver);
-    }
-
     public CartPage openCart() {
         openCartBtn.click();
         return new CartPage(driver);
     }
+
+    public CatalogPage searchItem(String itemName) {
+        searchTextArea.sendKeys(itemName);
+        searchBtn.click();
+        return new CatalogPage(driver);
+    }
+
+    public void acceptCookie() {
+        acceptCookieBtn.click();
+    }
+
 }
