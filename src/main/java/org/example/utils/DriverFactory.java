@@ -19,7 +19,7 @@ public class DriverManager {
             System.setProperty("Webdriver.chromedriver", "C://chromedriver");
             driver = new ChromeDriver();
         } else if (browser.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "C://geckodriver");
+            System.setProperty("Webdriver.geckodriver", "C://geckodriver");
             driver = new FirefoxDriver();
         }
         LOGGER.info("Driver: " + driver);

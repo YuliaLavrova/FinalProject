@@ -3,11 +3,13 @@ package org.example.uiTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.pages.*;
+import org.example.utils.ScreenshotUtil;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingSite7745 extends BaseTest {
@@ -15,7 +17,7 @@ public class ShoppingSite7745 extends BaseTest {
     private static final Logger LOGGER = LogManager.getLogger(ShoppingSite7745.class);
 
     @Test
-    public void tryToLoginWithIncorrectData() {
+    public void tryToLoginWithIncorrectDataTest() {
         String phone = " ";
         String password = "111111Qe";
         String errorMessageExpected = "Извините, указанный номер телефона или пароль неверны. Попробуйте набрать снова.";
@@ -23,6 +25,7 @@ public class ShoppingSite7745 extends BaseTest {
         homePage.openUrl();
         LoginForm loginForm = homePage.openLoginForm();
         String errorMessage = loginForm.getErrorMessageWithIncorrectLogin(phone, password);
+        ScreenshotUtil.saveScreenshot(driver);
         LOGGER.info("The next error message displayed: " + errorMessage);
         Assert.assertEquals(errorMessage, errorMessageExpected);
     }
@@ -38,6 +41,7 @@ public class ShoppingSite7745 extends BaseTest {
         homePage.openUrl();
         RegistrationForm registrationForm = homePage.openRegistrationForm();
         registrationForm.fillRegistrationForm(name, phone, email);
+        ScreenshotUtil.saveScreenshot(driver);
         String errorMessage = registrationForm.getErrorMessageWithConfirmPassword(password);
         LOGGER.info(password + " was entered as password");
         LOGGER.info("The next error message displayed: " + errorMessage);
@@ -62,55 +66,66 @@ public class ShoppingSite7745 extends BaseTest {
         RegistrationForm registrationForm = homePage.openRegistrationForm();
         String errorMessage = registrationForm.getErrorMessageWithIncorrectEmail(name, phone, email);
         LOGGER.info(email + " was typed into Email text field");
+        ScreenshotUtil.saveScreenshot(driver);
         LOGGER.info("Error message appeared: " + errorMessage);
         Assert.assertEquals(errorMessage, errorMessageExpected);
     }
 
     @Test
     public void searchItemsTest() {
-        String item = "Палатка";
+        String item = "FAIRY Сочный Лимон";
         boolean assertItem = false;
         CatalogPage catalogPage = new CatalogPage(driver);
         catalogPage.openUrl();
         List<String> list = catalogPage.getListOfItems(item);
+        ScreenshotUtil.saveScreenshot(driver);
         LOGGER.info(item + " was typed into search text field");
+        LOGGER.info(list.size() + " of items are in the list");
+        Assert.assertTrue(list.size() > 0,  "There are no items found");
+        List<String> errorList = new ArrayList<>();
         for (String textElement : list) {
             assertItem = false;
             if (textElement.contains(item)) {
                 assertItem = true;
+            }else{
+                errorList.add(textElement);
             }
         }
 //        for (String i:
-//             list) {
+//                list) {
 //            String[] arr = i.split(" ");
 //            assertItem = false;
-//            for (String word:
-//                 arr) {
-//                if(word.equals(item)) {
+//            for (String word :
+//                    arr) {
+//                if (word.equalsIgnoreCase(item)) {
 //                    assertItem = true;
 //                    break;
 //                }
 //            }
-        Assert.assertTrue(assertItem, "There are extra items displayed");
+//        }
+        Assert.assertTrue(assertItem, "There are extra items displayed: " +  errorList);
     }
 
     @Test
     public void addItemToCartTest() {
-        int index = 3;
-        String itemForSearch = "палатка";
+        String itemForSearch = "средство для мытья посуды fairy сочный лимон 0,9 л (4015400869443)";
         CatalogPage catalogPage = new CatalogPage(driver);
         catalogPage.openUrl();
-        catalogPage.searchAnyItem(itemForSearch);
-        List<String> list = catalogPage.getListOfItems(itemForSearch);
-        String itemInCatalog = list.get(index);
-        LOGGER.info(itemInCatalog + " was added to the cart");
-        catalogPage.clickAddToCartBtn(index);
+        ProductPage productPage = catalogPage.searchParticularItem(itemForSearch);
+        String nameOfItem = productPage.getNameOfProduct();
+        LOGGER.info(nameOfItem + "is found");
+        String price = productPage.getPriceOfProduct();
+        LOGGER.info("The price of product is " + price);
+        ScreenshotUtil.saveScreenshot(driver);
+        productPage.addToCart();
         CartPage cartPage = new CartPage(driver);
         cartPage.openUrl();
+        ScreenshotUtil.saveScreenshot(driver);
         LOGGER.info(cartPage.getNameOfItemCart() + " is in the cart");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(cartPage.getNameOfItemCart(), itemInCatalog.toLowerCase());
-        softAssert.assertEquals(cartPage.getPriceOfItemCart(), catalogPage.getPriceOfItemCatalog());
+        softAssert.assertEquals(cartPage.getNameOfItemCart(), itemForSearch.toLowerCase());
+        softAssert.assertEquals(cartPage.getNameOfItemCart(), nameOfItem.toLowerCase());
+        softAssert.assertEquals(cartPage.getPriceOfItemCart(), price);
         softAssert.assertAll();
     }
 }
