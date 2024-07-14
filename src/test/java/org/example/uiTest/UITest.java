@@ -82,7 +82,6 @@ public class UITest extends BaseTest {
         LOGGER.info(catalogPage.getItemsFromCatalog().size() + " of items are in the WebElementslist");
         List<String> list = catalogPage.getListOfItems();
         ScreenshotUtil.saveScreenshot(driver);
-        LOGGER.info(item + " was typed into search text field");
         LOGGER.info(list.size() + " of items are in the list");
         Assert.assertTrue(list.size() > 0,  "There are no items found");
         List<String> errorList = new ArrayList<>();
