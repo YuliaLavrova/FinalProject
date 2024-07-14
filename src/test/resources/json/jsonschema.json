@@ -30,7 +30,7 @@
           "type": "integer"
         },
         "orderDelivery3partTime": {
-          "type": "integer"
+          "type": "null"
         },
         "articul": {
           "type": "string"
@@ -2506,7 +2506,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -2945,7 +2945,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -3384,7 +3384,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -3823,7 +3823,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -4262,7 +4262,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -4701,7 +4701,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -5140,7 +5140,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -5579,7 +5579,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -6018,7 +6018,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -6457,7 +6457,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -6896,7 +6896,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -7335,7 +7335,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -7774,7 +7774,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -8213,7 +8213,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -8652,7 +8652,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"
@@ -9091,7 +9091,7 @@
                           "type": "integer"
                         },
                         "bankInterest": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "creditPrice": {
                           "type": "number"

@@ -11,7 +11,7 @@ Project is created with:
 * testng version: 7.10.1
 	
 ## Contents
-The project includs:
+The project includes:
 * # main 
   * utils
     * DriverFactory

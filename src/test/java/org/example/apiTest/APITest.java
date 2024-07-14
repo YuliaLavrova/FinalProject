@@ -24,7 +24,7 @@ public class APITest extends BaseAPITest{
         errorMessageExpected.add("Извините, указанный номер телефона или пароль неверны. Попробуйте набрать снова.");
         Map<String,String> formParams = new HashMap<>();
         formParams.put("prefix","375");
-        formParams.put("login","(678");
+        formParams.put("login","(67)8");
         formParams.put("password","123");
         formParams.put("remember","on");
         formParams.put("target","");
