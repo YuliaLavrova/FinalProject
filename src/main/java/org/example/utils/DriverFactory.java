@@ -32,25 +32,4 @@ public class DriverFactory {
         return driver;
     }
 
-
-//    public static WebDriver createDriver() {
-//        URL url;
-//        String browser = System.getProperty("browser");
-//        if (browser == null)
-//            browser = "firefox";
-//        try {
-//            url = new URL("http://localhost:4444");
-//        } catch (MalformedURLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        if (browser.equals("chrome")) {
-//            ChromeOptions chromeOptions = new ChromeOptions();
-//            driver = new RemoteWebDriver(url,chromeOptions);
-//        } else if(browser.equals("firefox")) {
-//            FirefoxOptions firefoxOptions = new FirefoxOptions();
-//            driver = new RemoteWebDriver(url, firefoxOptions);
-//        }
-//        LOGGER.info("Driver: " + driver);
-//        return driver;
-//    }
 }
